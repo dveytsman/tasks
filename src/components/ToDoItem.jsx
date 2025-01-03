@@ -1,8 +1,17 @@
 import ToDoEdit from "./ToDoEdit";
-const ToDoItem = () => {
+const ToDoItem = ({ item, onComplete }) => {
+  const toggleComplete = () => {
+    onComplete(item.id);
+    console.log(item.id);
+  };
   return (
-    <div>
-      <h1>To do item</h1>
+    <div className="item-container">
+      <p>{item.task}</p>
+      <input
+        onChange={toggleComplete}
+        type="checkbox"
+        checked={item.completed}
+      />
       <ToDoEdit />
     </div>
   );

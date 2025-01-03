@@ -1,10 +1,13 @@
 import ToDoItem from "./ToDoItem";
 
-const ToDoList = () => {
+const ToDoList = ({ list, onComplete }) => {
+  const renderedList = list.map((item) => {
+    return <ToDoItem key={item.id} item={item} onComplete={onComplete} />;
+  });
   return (
-    <div>
+    <div className="list-container">
       <h1>To do list</h1>
-      <ToDoItem />
+      <div className="list">{renderedList}</div>
     </div>
   );
 };
