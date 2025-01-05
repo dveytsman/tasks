@@ -1,8 +1,15 @@
 import ToDoItem from "./ToDoItem";
 
-const ToDoList = ({ list, onComplete }) => {
+const ToDoList = ({ list, onComplete, onDelete }) => {
   const renderedList = list.map((item) => {
-    return <ToDoItem key={item.id} item={item} onComplete={onComplete} />;
+    return (
+      <ToDoItem
+        key={item.id}
+        item={item}
+        onComplete={onComplete}
+        onDelete={onDelete}
+      />
+    );
   });
   return (
     <div className="list-container">

@@ -1,8 +1,11 @@
 import ToDoEdit from "./ToDoEdit";
-const ToDoItem = ({ item, onComplete }) => {
+const ToDoItem = ({ item, onComplete, onDelete }) => {
   const toggleComplete = () => {
     onComplete(item.id);
     console.log(item.id);
+  };
+  const deleteItem = () => {
+    onDelete(item.id);
   };
   return (
     <div className="item-container">
@@ -12,7 +15,8 @@ const ToDoItem = ({ item, onComplete }) => {
         type="checkbox"
         checked={item.completed}
       />
-      <ToDoEdit />
+      <button onClick={deleteItem}>X</button>
+      <ToDoEdit task={item} />
     </div>
   );
 };

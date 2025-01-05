@@ -18,13 +18,21 @@ const App = () => {
         return item;
       })
     );
-    console.log("handled");
   };
+
+  const handleDelete = (id) => {
+    setList(list.filter((item) => item.id !== id));
+  };
+
   return (
     <div>
       <h1>App</h1>
       <CreateToDo onAddItem={handleAddItem} />
-      <ToDoList list={list} onComplete={handleComplete} />
+      <ToDoList
+        list={list}
+        onComplete={handleComplete}
+        onDelete={handleDelete}
+      />
     </div>
   );
 };
