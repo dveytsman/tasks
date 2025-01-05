@@ -1,6 +1,7 @@
 import ToDoList from "./components/ToDoList";
 import CreateToDo from "./components/CreateToDo";
 import { useState, useEffect } from "react";
+import "./App.css";
 const App = () => {
   const [list, setList] = useState([]);
   useEffect(() => console.log(list), [list]);
@@ -24,14 +25,26 @@ const App = () => {
     setList(list.filter((item) => item.id !== id));
   };
 
+  const handleEdit = (task) => {
+    setList(
+      list.map((item) => {
+        if (item.id === task.id) {
+          item.task = task.task;
+        }
+        return item;
+      })
+    );
+  };
+
   return (
-    <div>
+    <div className="app-container">
       <h1>App</h1>
       <CreateToDo onAddItem={handleAddItem} />
       <ToDoList
         list={list}
         onComplete={handleComplete}
         onDelete={handleDelete}
+        onEdit={handleEdit}
       />
     </div>
   );

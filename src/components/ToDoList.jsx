@@ -1,6 +1,6 @@
 import ToDoItem from "./ToDoItem";
 
-const ToDoList = ({ list, onComplete, onDelete }) => {
+const ToDoList = ({ list, onComplete, onDelete, onEdit }) => {
   const renderedList = list.map((item) => {
     return (
       <ToDoItem
@@ -8,6 +8,7 @@ const ToDoList = ({ list, onComplete, onDelete }) => {
         item={item}
         onComplete={onComplete}
         onDelete={onDelete}
+        onEdit={onEdit}
       />
     );
   });
