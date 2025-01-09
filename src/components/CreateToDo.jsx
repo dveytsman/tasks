@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const CreateToDo = ({ onAddItem }) => {
-  const [task, setTask] = useState("");
+  // const [task, setTask] = useState("");
+  const inputRef = useRef(null);
 
   const handleChangeTask = (e) => {
     setTask(e.target.value);
@@ -9,19 +10,23 @@ const CreateToDo = ({ onAddItem }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(inputRef);
+    // if (task.trim() !== "") {
+    const newTask = {
+      id: Date.now(),
+      task: inputRef.current.value,
+      completed: false,
+    };
+    onAddItem(newTask, newTask.id);
 
-    if (task.trim() !== "") {
-      const newTask = {
-        id: Date.now(),
-        task: task,
-        completed: false,
-      };
-      onAddItem(newTask);
-
-      console.log(newTask);
-      setTask("");
-    }
+    console.log(newTask);
+    // setTask("");
+    inputRef.current.value = "";
   };
+  // };
+
+  // TODO: controlled to uncontrolled
+  // TODO: CHANGE array to object for faster lookup.
 
   return (
     <div>
@@ -29,8 +34,9 @@ const CreateToDo = ({ onAddItem }) => {
       <form>
         <input
           type="text"
-          value={task}
-          onChange={handleChangeTask}
+          ref={inputRef}
+          // value={task}
+          // onChange={handleChangeTask}
           placeholder="Enter New Task"
         />
         <button onClick={handleSubmit} type="submit">

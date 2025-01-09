@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 const ToDoEdit = ({ task, onEdit }) => {
-  const [title, setTitle] = useState(task.title);
+  const [title, setTitle] = useState("");
+  const editRef = useRef(null);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -10,15 +11,16 @@ const ToDoEdit = ({ task, onEdit }) => {
     e.preventDefault();
     const updatedTask = {
       id: task.id,
-      task: title,
+      task: editRef.current.value,
       completed: task.completed,
     };
     onEdit(updatedTask);
-    setTitle("");
+    // setTitle("");
+    editRef.current.value = "";
   };
   return (
     <form onSubmit={handleTitleEdit}>
-      <input type="text" value={title} onChange={handleTitleChange} />
+      <input type="text" ref={editRef} />
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import ToDoEdit from "./ToDoEdit";
 const ToDoItem = ({ item, onComplete, onDelete, onEdit }) => {
+  console.log(item, "item from todoitem component");
   const toggleComplete = () => {
     onComplete(item.id);
     console.log(item.id);

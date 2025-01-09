@@ -3,37 +3,38 @@ import CreateToDo from "./components/CreateToDo";
 import { useState, useEffect } from "react";
 import "./App.css";
 const App = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState({});
   useEffect(() => console.log(list), [list]);
 
-  const handleAddItem = (item) => {
-    setList([...list, item]);
+  const handleAddItem = (item, id) => {
+    setList((prevList) => {
+      return { ...prevList, [id]: item };
+    });
   };
 
   const handleComplete = (id) => {
-    setList(
-      list.map((item) => {
-        if (item.id === id) {
-          item.completed = !item.completed;
-        }
-        return item;
-      })
-    );
+    const newItem = {
+      id: id,
+      task: list[id].task,
+      completed: !list[id].completed,
+    };
+    setList((prevList) => ({
+      ...prevList,
+      [id]: newItem,
+    }));
   };
 
   const handleDelete = (id) => {
-    setList(list.filter((item) => item.id !== id));
+    setList((prevList) => {
+      const { [id]: _, ...rest } = prevList;
+      return rest;
+    });
   };
 
   const handleEdit = (task) => {
-    setList(
-      list.map((item) => {
-        if (item.id === task.id) {
-          item.task = task.task;
-        }
-        return item;
-      })
-    );
+    setList((prevList) => {
+      return { ...prevList, [task.id]: task };
+    });
   };
 
   return (

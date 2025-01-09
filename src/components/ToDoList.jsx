@@ -1,7 +1,8 @@
 import ToDoItem from "./ToDoItem";
 
 const ToDoList = ({ list, onComplete, onDelete, onEdit }) => {
-  const renderedList = list.map((item) => {
+  const renderedList = Object.values(list).map((item) => {
+    console.log("item", item.task, item.id, item);
     return (
       <ToDoItem
         key={item.id}
